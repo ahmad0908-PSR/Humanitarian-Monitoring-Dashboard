@@ -1,5 +1,6 @@
 import streamlit as st
 
+from charts.charts import households_by_province, households_by_gender, households_by_sector, households_by_survey_round, assistance_by_province
 from utils.filters import apply_filters
 from utils.load_data import load_data
 from utils.calculations import (
@@ -74,6 +75,54 @@ with col4:
 
 st.write(f"Rows: {filtered_df.shape[0]}")
 st.write(f"Columns: {filtered_df.shape[1]}")
+
+# ----------------------------------------------------
+# Distribution Charts:
+# ----------------------------------------------------
+
+province_fig = households_by_province(filtered_df)
+gender_fig = households_by_gender(filtered_df)
+
+col1, col2 = st.columns(2)
+with col1:
+    st.plotly_chart(
+        province_fig,
+        width="stretch"
+    )
+
+with col2:
+    st.plotly_chart(
+        gender_fig,
+        width="stretch"
+    )
+
+sector_fig = households_by_sector(filtered_df)
+survey_round_fig = households_by_survey_round(filtered_df)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.plotly_chart(
+        sector_fig,
+        width="stretch"
+    )
+
+with col2:
+    st.plotly_chart(
+        survey_round_fig,
+        width="stretch"
+    )
+
+
+# ----------------------------------------------------
+# Totals Charts:
+# ----------------------------------------------------
+
+assistance_province = assistance_by_province(filtered_df)
+st.plotly_chart(assistance_province, width="stretch")
+
+
+
 
 # ----------------------------------------------------
 # DATA TABLE
