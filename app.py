@@ -29,7 +29,7 @@ df = load_data()
 
 filtered_df = apply_filters(df)
 # ----------------------------------------------------
-# KPI CALCULATIONS
+# KPI CALCULATIONS, now they use filtered_df instead of df
 # ----------------------------------------------------
 
 total_households = get_total_households(filtered_df)
