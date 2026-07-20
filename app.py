@@ -23,6 +23,8 @@ from utils.calculations import (
     get_total_assistance,
     get_average_satisfaction,
 )
+from components.kpi_cards import display_kpi_cards
+
 
 # ----------------------------------------------------
 # PAGE CONFIGURATION
@@ -69,44 +71,18 @@ st.markdown(
 
 st.success("Dataset loaded successfully!")
 
-# ----------------------------------------------------
-# KPI CARDS
-# ----------------------------------------------------
-st.divider()
-
-with st.container():
-
-    st.subheader("📌 Key Performance Indicators")
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        st.metric("Households",
-                  f"{total_households:,}"
-        )
-
-    with col2:
-        st.metric("Provinces",
-                  f"{total_provinces:,}"
-        )
-
-    with col3:
-        st.metric(
-            "Total Assistance",
-            f"${total_assistance:,.0f}"
-        )
-
-    with col4:
-        st.metric(
-            "Avg Satisfaction",
-            f"{average_satisfaction:.1f}"
-        )
 
 # ----------------------------------------------------
-# DATA INFORMATION
+# Displaying KPI cards:
 # ----------------------------------------------------
 
-st.write(f"Rows: {filtered_df.shape[0]}")
-st.write(f"Columns: {filtered_df.shape[1]}")
+display_kpi_cards(
+    total_households,
+    total_provinces,
+    total_assistance,
+    average_satisfaction
+)
+
 
 
 tab_analysis, tab_trends, tab_data = st.tabs(
@@ -272,9 +248,15 @@ with tab_trends:
 
             )
 
-    
 
 with tab_data:
+    # ----------------------------------------------------
+    # DATA INFORMATION
+    # ----------------------------------------------------
+
+    st.write(f"Rows: {filtered_df.shape[0]}")
+    st.write(f"Columns: {filtered_df.shape[1]}")
+
     # ----------------------------------------------------
     # DATA TABLE
     # ----------------------------------------------------
