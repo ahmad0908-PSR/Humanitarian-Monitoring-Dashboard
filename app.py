@@ -59,7 +59,7 @@ average_satisfaction = get_average_satisfaction(filtered_df)
 # PAGE TITLE
 # ----------------------------------------------------
 
-st.title("🌍 Humanitarian Monitoring Dashboard")
+st.title("🌍 MEAL International Dashobard")
 
 st.markdown(
     """
